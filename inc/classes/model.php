@@ -13,10 +13,10 @@ require_once('inc/classes/periodicos.php');
 class model{
     private $driver = 'mysql';
     private $server = 'localhost';
-    private $user = 'dalamar_php';
-    private $password = 'M0nd3030';
-    private $database = 'dalamar_finance';
-    private $debugging = false;
+    private $user = 'root';
+    private $password = 'root';
+    private $database = 'finance';
+    private $debugging = true;
     private $db;
     
     
@@ -28,14 +28,10 @@ class model{
         $this->db->debug = $this->debugging;
     }
 
-    public function insertar_cuenta($_cuenta){
-        $cuenta = new cuenta($_cuenta, $this->db);
-        
-        if (!is_null($cuenta)){
-            $sql = "DELETE FROM Cuentas WHERE numero = $cuenta->getNumero()";
-            
-            if ($this->db->Execute($sql) == false) echo $this->db->ErrorMsg(); 
-        }
+    public function insertar_cuenta($_nombre, $_numero, $_ahorro){
+        $cuenta = new cuenta(0, $this->db, $_nombre, $_numero, $_ahorro, true);
+
+        $cuenta->commit();
     }
 
     
@@ -43,8 +39,8 @@ class model{
         $cuenta = new cuenta($_cuenta, $this->db);
         
         if (!is_null($cuenta)){
-            $sql = "DELETE FROM Cuentas WHERE numero = $cuenta->getNumero()";
-            
+            $sql = "DELETE FROM Cuentas WHERE idCuentas = ".$cuenta->getId();
+
             if ($this->db->Execute($sql) == false) echo $this->db->ErrorMsg(); 
         }
     }
@@ -53,7 +49,7 @@ class model{
         $cuenta = new cuenta($_cuenta, $this->db);
         
         if (!is_null($cuenta)){
-            $cuenta->setActiva(FALSE);
+            $cuenta->setActiva(0);
             $cuenta->commit();
         }
     }
@@ -188,6 +184,13 @@ class model{
         
     }
     
+    
+    public function insertar_tipoApunte($_nombre, $_detalle = '') {
+        
+        $tipoApunte = new TiposApunte(0, $this->db, $_nombre, $_detalle);
+        
+        $tipoApunte->commit();
+    } 
 }
 
  

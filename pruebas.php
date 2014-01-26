@@ -30,10 +30,16 @@ $boooh->insertar_apunte("Insercion de retirada de efectivo", 1200, $fecha, $fech
 $boooh->insertar_apunte("Insercion de retirada de efectivo", 100, $fecha, $fecha, 1, 1, FALSE);*/
 
 //$boooh->insertar_apunte("Primera insercion desde el modelo, retirada de efectivo", 250, $fecha, $fecha, 1, '0000-0000-00000000001');
-if (!$boooh->transferencia_interna(1, 2, 50)) echo "Error en la transferencia";
+//if (!$boooh->transferencia_interna(3, 5, 50)) echo "Error en la transferencia";
 //$boooh->desactivar_cuenta('0000-0000-00000000001');
-$boooh->estado_cuentas();
+//$boooh->insertar_cuenta("Cuenta de pruebas", "000-000-000000000", TRUE );   
+//$boooh->activar_cuenta(5);
 
+//if (!$boooh->transferencia_interna(5, 3, 50)) echo "Error en la transferencia";
+//$boooh->insert
+//$boooh->estado_cuentas();
+
+$boooh->insertar_tipoApunte("Alimentación", "Compras varias en alimentación");
 
 
 //1500+300+1200-50 = 2950

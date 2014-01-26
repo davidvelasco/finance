@@ -24,8 +24,10 @@ class Cuenta{
                                     WHERE idCuentas = ".$_id);
 
                 if ($rs->RecordCount() == 0){ 
+                    $this->id = 0;
                     $this->setNombre($_nombre);
                     $this->setNumero($_numero);
+                    $this->setSaldo(0);
                     $this->setAhorro($_ahorro);
                     $this->setActiva($_activa);
                 } else {
@@ -94,10 +96,9 @@ class Cuenta{
                 $rs = $this->db->Execute("SELECT * 
                                     FROM Cuentas 
                                     WHERE idCuentas = ".$this->id);
-                
+
                 if ($rs->RecordCount() == 0){
                     $sql = "INSERT INTO Cuentas VALUES('','$this->nombre','$this->numero',$this->saldo, $this->ahorro, $this->activa)";
-                    
                     if ($this->db->Execute($sql) == false) echo $this->db->ErrorMsg();   
                 } else {
                     $sql = "UPDATE Cuentas SET nombre='$this->nombre', numero = '$this->numero', saldo = $this->saldo, ahorro = $this->ahorro, activa = $this->activa WHERE numero = '".$this->numero."'";

@@ -25,6 +25,7 @@ class TiposApunte {
                 if ($rs->RecordCount() == 0){
                     $this->setNombre($_nombre);
                     $this->setDetalle($_detalle);
+                    $this->idTipoApunte = 0;
                 } else {
                    $valores = $rs->FetchRow();
 
@@ -58,13 +59,13 @@ class TiposApunte {
                                     WHERE idTipo = $this->idTipoApunte");
 
                 if ($rs->RecordCount() == 0){
-                    $sql = "INSERT INTO tiposApunte VALUES('','$this->nombre','$this->detalle')";
+                    $sql = "INSERT INTO tiposApunte VALUES($this->nombre','$this->detalle')";
                     
-                    if ($GLOBALS['db']->Execute($sql) == false) echo $GLOBALS['db']->ErrorMsg();   
+                    if ($this->db->Execute($sql) == false) echo $this->db->ErrorMsg();   
                 } else {
                     $sql = "UPDATE Cuentas SET nombre='$this->nombre', detalle = '$this->detalle')";
                     
-                    if ($GLOBALS['db']->Execute($sql) == false) echo $$GLOBALS['db']->ErrorMsg();   
+                    if ($this->db->Execute($sql) == false) echo $this->db->ErrorMsg();   
                 }
         }
 }
